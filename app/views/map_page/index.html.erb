@@ -1,0 +1,216 @@
+<section ng-controller="mainController" ng-init="getData()">
+<div id="progress"><div id="progress-bar"><img src="<%= image_path("loader.gif") %>" alt="loader"/></div></div>
+<div class="customLoader" ng-show="showLoder">
+<img src="<%= image_path("loader.gif") %>" alt="loader"/>
+</div>
+
+<nav class="navbar navbar-inverse nav-bar-top navbar-fixed-top">
+               <div class="container-fluid">
+                                  <div class="navbar-header">
+                                                <a class="navbar-brand logo-brand demo_logo" href="javascript:void(0);">Angular Demo App</a>
+                                  </div>
+                                                                                                    
+                                  <div id="navbar" class="navbar-collapse ">
+                                       <ul class="navbar-form nav navbar navbar-right">
+                                          <li class="src_rw_lst">
+                                            <div class="form-group">
+                                              <form novalidate ng-submit="getAddress()" >
+                                                   <p class="add">Address</p>
+                                                   <input type="text" class="form-control" ng-model="newPlaceAddress" class="form-control"  />
+                                                   <input type="submit" class="btn btn-warning" value="Show Location" ng-disabled="changePasswordForm.$invalid" />
+                                              </form>
+                                            </div>
+                                           </li>
+                                        <!--  <li>  <p class="add">Date</p> <div id="slider"></div></li> -->
+                                        <li>  <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">
+                                        <button type="button" class="navbar-toggle tog_menu">
+                                                   <span class="sr-only">Toggle navigation</span>
+                                                   <span class="icon-bar"></span>
+                                                   <span class="icon-bar"></span>
+                                                   <span class="icon-bar"></span>
+                                                 </button></a></li>
+                                       </ul>
+                                  </div>
+                                  
+                                  
+                                  
+                                  
+               </div>
+</nav>
+                
+                
+                
+              
+                
+                
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+	       <li>
+		  <div id="navbar" class="navbar-collapse collapse mobile_div">
+                                       <ul class="navbar-form nav navbar navbar-right">
+                                          <li>
+                                            <div class="form-group">
+                                              <form novalidate ng-submit="getAddress()" >
+                                                   <p class="add">Address</p>
+                                                   <input type="text" class="form-control" ng-model="newPlaceAddress" class="form-control" placeholder="Enter Address" />
+                                                   <input type="submit" class="btn btn-warning" value="Show Location" ng-disabled="changePasswordForm.$invalid" />
+                                              </form>
+                                            </div>
+                                           </li>
+                                        
+                                       </ul>
+                                  </div>	
+	       </li>
+                <li class="sidebar-brand">
+                  Filters
+                </li>
+                <li>
+                    <p class="add">Time line</p>
+                    <div id="slider"></div>
+                </li>
+                <li class="crm_type">
+                 <p class="add">Crime Type</p>
+                 <table>
+                     <tr ng-repeat="data in crimeType">
+                          <td>
+                             <label> <input type="checkbox" checklist-model="search.type" checklist-value="data"> {{data}} </label>
+                          </td>
+                     </tr>
+                 </table>
+                </li>
+   <!--             <li>
+                <p class="add">Arrest</p>
+                 <input type="radio" name="arrest" ng-model="search.arrest" value="true" />&nbsp; Yes &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                 <input type="radio" name="arrest" ng-model="search.arrest" value="false" />&nbsp; No <br/>
+                </li>    -->
+                <li>
+<!--                                  <table class="table table-hovered" >
+                                      <thead>
+                                       <tr>
+                                         <th class="col-xs-2">Type</th>
+                                         <th class="col-xs-2">Information</th>
+                                      </tr>
+                                      </thead>
+                                  <tbody>
+				       <tr>
+				         <td class="col-xs-2"><b>Primary Type</b></td>
+					 <td class="col-xs-2"><b>{{serverData.primary_type}}</b></td>
+			               </tr>
+			               <tr>
+				         <td class="col-xs-2"><b>Arrest</b></td>
+					 <td class="col-xs-2"><b>{{serverData.arrest}}</b></td>
+			               </tr>
+			               <tr>
+				         <td class="col-xs-2"><b>Beat</b></td>
+					 <td class="col-xs-2"><b>{{serverData.beat}}</b></td>
+			               </tr>
+			               <tr>
+				         <td class="col-xs-2"><b>Case Number</b></td>
+					 <td class="col-xs-2"><b>{{serverData.case_number}}</b></td>
+			               </tr>
+			               <tr>
+				         <td class="col-xs-2"><b>Date</b></td>
+					 <td class="col-xs-2"><b>{{serverData.date}}</b></td>
+			               </tr>
+			               <tr>
+				         <td class="col-xs-2"><b>Domestic</b></td>
+					 <td class="col-xs-2"><b>{{serverData.domestic}}</b></td>
+			               </tr>
+			               <tr>
+				         <td class="col-xs-2"><b>Fbi code</b></td>
+					 <td class="col-xs-2"><b>{{serverData.fbi_code}}</b></td>
+			               </tr>
+			               <tr>
+				         <td class="col-xs-2"><b>Description</b></td>
+					 <td class="col-xs-2"><b>{{serverData.description}}</b></td>
+			               </tr>
+				       <tr>
+				         <td class="col-xs-2"><b>Block</b></td>
+					 <td class="col-xs-2"><b>{{serverData.block}}</b></td>
+			               </tr>
+				       <tr>
+				         <td class="col-xs-2"><b>Community Area</b></td>
+					 <td class="col-xs-2"><b>{{serverData.community_area}}</b></td>
+			               </tr>
+				       <tr>
+				         <td class="col-xs-2"><b>District</b></td>
+					 <td class="col-xs-2"><b>{{serverData.district}}</b></td>
+			               </tr>
+				       <tr>
+				         <td class="col-xs-2"><b>Icur</b></td>
+					 <td class="col-xs-2"><b>{{serverData.iucr}}</b></td>
+			               </tr>
+				       <tr>
+				         <td class="col-xs-2"><b>Location</b></td>
+					 <td class="col-xs-2"><b>{{serverData.location_description}}</b></td>
+			               </tr>
+				       <tr>
+				         <td class="col-xs-2"><b>Ward</b></td>
+					 <td class="col-xs-2"><b>{{serverData.ward}}</b></td>
+			               </tr>
+				       <tr>
+				         <td class="col-xs-2"><b>Year</b></td>
+					 <td class="col-xs-2"><b>{{serverData.year}}</b></td>
+			               </tr>
+                                   </tbody>
+                                  </table> -->
+                                  <table class="table table-hovered" >
+                                      <thead>
+                                       <tr>
+                                         <th class="col-xs-2">Crime Type</th>
+                                         <th class="col-xs-2">Arrest</th>
+                                         <!-- <th>Case Number</th> -->
+                                         <th class="col-xs-6">Description</th>
+                                         <th class="col-xs-2">Date</th>
+                                      </tr>
+                                      </thead>
+                                  <tbody>
+                                      <tr ng-repeat="info in serverData" ng-click="moveToMarker($index)">
+                                         <td class="col-xs-2"><b>{{info.primary_type}}</b></td>
+                                         <td class="col-xs-2">{{info.arrest}}</td>
+                                         <!--<td>{{info.case_number}}</td> -->
+                                         <td class="col-xs-6">{{info.description}}</td>
+                                          <td class="col-xs-2">{{info.date | date:'mediumDate'}}</td>
+                                      </tr>
+                                   </tbody>
+                                  </table>				  
+                </li>
+               
+            </ul>  
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+                    <div id="map"></div>
+        </div>
+        <!-- /#page-content-wrapper -->
+   
+    </div>
+    <!-- /#wrapper -->
+    
+    
+      
+    
+ </section>
+ 
+ <script type="text/javascript">
+    $("#slider").dateRangeSlider();
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    
+    $(function () {
+    $('input,textarea').focus(function () {
+        $(this).data('placeholder', $(this).attr('placeholder'))
+               .attr('placeholder', '');
+    }).blur(function () {
+        $(this).attr('placeholder', $(this).data('placeholder'));
+    });
+});
+ </script>
+    
