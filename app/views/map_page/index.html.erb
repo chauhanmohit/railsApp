@@ -81,88 +81,13 @@
                      </tr>
                  </table>
                 </li>
-   <!--             <li>
-                <p class="add">Arrest</p>
-                 <input type="radio" name="arrest" ng-model="search.arrest" value="true" />&nbsp; Yes &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-                 <input type="radio" name="arrest" ng-model="search.arrest" value="false" />&nbsp; No <br/>
-                </li>    -->
                 <li>
-<!--                                  <table class="table table-hovered" >
-                                      <thead>
-                                       <tr>
-                                         <th class="col-xs-2">Type</th>
-                                         <th class="col-xs-2">Information</th>
-                                      </tr>
-                                      </thead>
-                                  <tbody>
-				       <tr>
-				         <td class="col-xs-2"><b>Primary Type</b></td>
-					 <td class="col-xs-2"><b>{{serverData.primary_type}}</b></td>
-			               </tr>
-			               <tr>
-				         <td class="col-xs-2"><b>Arrest</b></td>
-					 <td class="col-xs-2"><b>{{serverData.arrest}}</b></td>
-			               </tr>
-			               <tr>
-				         <td class="col-xs-2"><b>Beat</b></td>
-					 <td class="col-xs-2"><b>{{serverData.beat}}</b></td>
-			               </tr>
-			               <tr>
-				         <td class="col-xs-2"><b>Case Number</b></td>
-					 <td class="col-xs-2"><b>{{serverData.case_number}}</b></td>
-			               </tr>
-			               <tr>
-				         <td class="col-xs-2"><b>Date</b></td>
-					 <td class="col-xs-2"><b>{{serverData.date}}</b></td>
-			               </tr>
-			               <tr>
-				         <td class="col-xs-2"><b>Domestic</b></td>
-					 <td class="col-xs-2"><b>{{serverData.domestic}}</b></td>
-			               </tr>
-			               <tr>
-				         <td class="col-xs-2"><b>Fbi code</b></td>
-					 <td class="col-xs-2"><b>{{serverData.fbi_code}}</b></td>
-			               </tr>
-			               <tr>
-				         <td class="col-xs-2"><b>Description</b></td>
-					 <td class="col-xs-2"><b>{{serverData.description}}</b></td>
-			               </tr>
-				       <tr>
-				         <td class="col-xs-2"><b>Block</b></td>
-					 <td class="col-xs-2"><b>{{serverData.block}}</b></td>
-			               </tr>
-				       <tr>
-				         <td class="col-xs-2"><b>Community Area</b></td>
-					 <td class="col-xs-2"><b>{{serverData.community_area}}</b></td>
-			               </tr>
-				       <tr>
-				         <td class="col-xs-2"><b>District</b></td>
-					 <td class="col-xs-2"><b>{{serverData.district}}</b></td>
-			               </tr>
-				       <tr>
-				         <td class="col-xs-2"><b>Icur</b></td>
-					 <td class="col-xs-2"><b>{{serverData.iucr}}</b></td>
-			               </tr>
-				       <tr>
-				         <td class="col-xs-2"><b>Location</b></td>
-					 <td class="col-xs-2"><b>{{serverData.location_description}}</b></td>
-			               </tr>
-				       <tr>
-				         <td class="col-xs-2"><b>Ward</b></td>
-					 <td class="col-xs-2"><b>{{serverData.ward}}</b></td>
-			               </tr>
-				       <tr>
-				         <td class="col-xs-2"><b>Year</b></td>
-					 <td class="col-xs-2"><b>{{serverData.year}}</b></td>
-			               </tr>
-                                   </tbody>
-                                  </table> -->
                                   <table class="table table-hovered" >
                                       <thead>
                                        <tr>
                                          <th class="col-xs-2">Crime Type</th>
                                          <th class="col-xs-2">Arrest</th>
-                                         <!-- <th>Case Number</th> -->
+                                         <th class="col-xs-2">Case Number</th> 
                                          <th class="col-xs-6">Description</th>
                                          <th class="col-xs-2">Date</th>
                                       </tr>
@@ -171,7 +96,7 @@
                                       <tr ng-repeat="info in serverData" ng-click="moveToMarker($index)">
                                          <td class="col-xs-2"><b>{{info.primary_type}}</b></td>
                                          <td class="col-xs-2">{{info.arrest}}</td>
-                                         <!--<td>{{info.case_number}}</td> -->
+                                         <td class="col-xs-2">{{info.case_number}}</td> 
                                          <td class="col-xs-6">{{info.description}}</td>
                                           <td class="col-xs-2">{{info.date | date:'mediumDate'}}</td>
                                       </tr>

@@ -106,7 +106,7 @@ app.controller('mainController',['$scope','$http','$q','$timeout',function($scop
 	    $scope.search.lat = e.target.getCenter().lat;
 	    $scope.search.lang = e.target.getCenter().lng;
 	    $scope.search.radius = distance < 1000 ? distance = 1000 : distance*2 ;
-	    $scope.$apply();    
+	    $scope.$apply();
 	}
     });
     
@@ -130,7 +130,6 @@ app.controller('mainController',['$scope','$http','$q','$timeout',function($scop
      **/
     $scope.getData = function (){
 	$scope.getRadiusOnLoad();
-	$scope.getTableContent();
         if (typeof $scope.search.lat == undefined || !$scope.search.lat ) $scope.search.lat = 41.8838113  ;
         if (typeof $scope.search.lang == undefined || !$scope.search.lang ) $scope.search.lang = -87.6317489 ;
         if (typeof $scope.search.radius == undefined || !$scope.search.radius ) $scope.search.radius = 500 ;
@@ -142,23 +141,27 @@ app.controller('mainController',['$scope','$http','$q','$timeout',function($scop
 	 
 	canceller = $q.defer();
 	$scope.showLoder = true ;
+	//$scope.getTableContent();
 	var LeafIcon = L.Icon.extend({
-					options: {
-					    shadowUrl: '/map-icon/marker-shadow.png',
+					options: {  
+					    shadowUrl: '<%= image_path("marker-shadow.png") %>',
 					    iconSize:     [41, 41], // size of the icon
 					    shadowSize:   [41, 41], // size of the shadow
 					}
 				    });
-	var greenIcon = new LeafIcon({iconUrl: '/map-icon/mark1.png'}),
-			redIcon = new LeafIcon({iconUrl: '/map-icon/mark2.png'}),
-			orangeIcon = new LeafIcon({iconUrl: '/map-icon/mark3.png'}),
-			purpleIcon = new LeafIcon({iconUrl: '/map-icon/mark4.png'}),
-			defaultIcon = new LeafIcon({iconUrl: '/map-icon/marker-icon.png'});
-			
-	//$http.post('/api/web/data.json', { 'data': $scope.search })
+	var greenIcon = new LeafIcon({iconUrl: '<%= image_path("mark1.png") %>' }),
+			redIcon = new LeafIcon({iconUrl: '<%= image_path("mark2.png") %>'}),
+			orangeIcon = new LeafIcon({iconUrl: '<%= image_path("mark3.png") %>'}),
+			purpleIcon = new LeafIcon({iconUrl: '<%= image_path("mark4.png") %>'}),
+			defaultIcon = new LeafIcon({iconUrl: '<%= image_path("mark5.png") %>'});
+
+	// set the singleMarkerMode on Behalf of the current zoom level
+	$scope.map.getZoom() >= 18 ? $scope.markers.options.singleMarkerMode = false : $scope.markers.options.singleMarkerMode = true ;
+	
         $http.get('/api/web/data.json?lat='+$scope.search.lat+'&lang='+$scope.search.lang+'&radius='+$scope.search.radius+'&from='+$scope.search.from+'&to='+$scope.search.to+'&type='+$scope.search.type+'&arrest='+$scope.search.arrest ,
 	{ timeout: canceller.promise })
         .success(function(res,status,config,header){
+	    $scope.serverData = res ;    
 	    $scope.removeOldMarkers();    
             for (var i = 0; i < res.length; i++) {
 	        setTimeout((function(x){
@@ -201,6 +204,7 @@ app.controller('mainController',['$scope','$http','$q','$timeout',function($scop
 	$timeout(function() {
 	    $scope.map.setZoom(18);
 		$timeout(function() {
+		    $scope.markers.options.singleMarkerMode = true ;
 		    markerList[id].openPopup();
 		    $scope.isApiHitOnZoom = true
 		}, 500);
@@ -217,7 +221,7 @@ app.controller('mainController',['$scope','$http','$q','$timeout',function($scop
 	var center = {'lat':pos.lat, 'lng': pos.lng}
 	var distance = getDistance(center, ne);
 	var cal = parseFloat((distance*10)/100) ;
-	var radius = parseFloat(distance + cal) ;
+	var radius = 2 * parseFloat(distance + cal)  ;
 	return radius ;
     }
     
@@ -229,13 +233,13 @@ app.controller('mainController',['$scope','$http','$q','$timeout',function($scop
      **/
     $scope.getTableContent = function (){
 	var radius = getRadiusForTabelContentApiHit();
-	$scope.search.radius = radius ;
 	$scope.serverData = [] ;
-	$http.post('/api/web/getTableContent.json',{'data':$scope.search})
+	$http.get('/api/web/getTableContent.json?lat='+$scope.search.lat+'&lang='+$scope.search.lang+'&radius='+radius+'&from='+$scope.search.from+'&to='+$scope.search.to+'&type='+$scope.search.type+'&arrest='+$scope.search.arrest ,
+	{ timeout: canceller.promise })
 	.success(function(res,status,config,header){
 	    $scope.serverData = res ;    
 	}).error(function(err,status,config,header){
-	    console.log("Something happend wrong at serverEnd >>>>>>>>>>>>>>>>>>>",err);
+	    console.log("Something happend wrong at serverEnd");
 	});
     }
     
@@ -293,8 +297,9 @@ app.controller('mainController',['$scope','$http','$q','$timeout',function($scop
     /**
      *	jquery code for the Date rage picker slider
      *	'from' : '2012-09-14',
-	'to' : '2012-12-25',
+     *	'to' : '2012-12-25',
      **/
+     
     $("#slider").dateRangeSlider("option",
 	"bounds",
 	{
@@ -311,18 +316,18 @@ app.controller('mainController',['$scope','$http','$q','$timeout',function($scop
 	$scope.search.to = to ;
 	$scope.$apply();
     });
-    
+
     // watcher for  search change
     $scope.$watchCollection('search' , function(n,o){
 	if(n !== o ){
 	    $scope.getData();
 	}
-    });
+    },true);
     
     $scope.$watchCollection('search.type' , function(n,o){
-	if(n !== o ){
+	if( n !== o ){
 	    $scope.getData();
 	}
-    });
+    },true);
     
 }]); 

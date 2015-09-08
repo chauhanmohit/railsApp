@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'map_page/index'
+  #get 'map_page/index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -8,10 +8,10 @@ Rails.application.routes.draw do
   root 'map_page#index'
 
   ## for desktop or web user to hit the api for get request
-  get 'api/web/data' => 'api_handeler#index'
+  get 'api/web/data' => 'api_handeler#data'
   
   ### for desktop or web user to hit the api for post request
-  post 'api/web/getTableContent' => 'api_handeler#getTableContent'
+  get 'api/web/getTableContent' => 'api_handeler#getTableContent'
   
   ## for mobile user to hit the api
   get 'api/mobile/data' => 'api_handeler#mobileData'
