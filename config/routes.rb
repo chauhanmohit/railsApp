@@ -16,6 +16,19 @@ Rails.application.routes.draw do
   ## for mobile user to hit the api
   get 'api/mobile/data' => 'api_handeler#mobileData'
   
+  #users routes path
+  
+  #resource
+  resources :user
+  #routes
+  get    'register'  => 'users#register'
+  post   'register'  => 'users#register'
+  get    'login'   => 'users#new'
+  post   'login'   => 'users#new'
+  get    'logout'  => 'users#destroy'
+  get    'dashboard'    => 'users#dashboard'
+  
+  
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
