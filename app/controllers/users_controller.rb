@@ -1,9 +1,10 @@
 class UsersController < ApplicationController
-  #before_filter :login_required, :only => :show
-  
+  before_filter :validate_authorization_for_user, only: [:dashboard]
+ 
   def new
     @user = User.new 
     if request.post?
+        #Updated to use strong parameters
         @user = User.find_by({email: params[:user][:email]})
         if @user.authenticate(params[:user][:password_digest])
           log_in @user
@@ -17,7 +18,6 @@ class UsersController < ApplicationController
   
   # show the user details after authentication
   def dashboard
-     
   end
   
   #register the new user
@@ -39,11 +39,15 @@ class UsersController < ApplicationController
   # logout the current user
   def destroy
     log_out
-    redirect_to root_url
+    redirect_to login_path
   end
   
   def user_params
       params.require(:user).permit(:name, :email, :password,:password_confirmation)
   end
-   
+  
+  def validate_authorization_for_user
+    redirect_to login_path unless current_user != nil 
+  end
+  
 end

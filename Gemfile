@@ -1,11 +1,9 @@
 source 'https://rubygems.org'
-
+ruby '2.2.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
 
-#use becrypt to hash the password
-gem 'bcrypt','3.1.7'
 # Use postgresql as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets
@@ -27,6 +25,20 @@ gem 'jbuilder', '~> 2.0' # used for serialization of models into JSON
 gem 'kaminari' # adds pagination to ActiveModels 
 
 
+##social media gems
+gem 'devise'
+gem 'koala'
+gem 'twitter'
+gem 'linkedin'
+gem 'omniauth'
+gem 'omniauth-oauth2'
+gem 'omniauth-facebook'
+gem 'omniauth-github'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-linkedin-oauth2'
+gem 'omniauth-twitter'
+
+
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
@@ -34,10 +46,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'soda-ruby', :require => 'soda'
 
 # installing gon
-gem 'gon'
+#gem 'gon'
 
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+ gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

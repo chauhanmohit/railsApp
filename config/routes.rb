@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   get 'api/mobile/data' => 'api_handeler#mobileData'
   
   #users routes path
-  
+  devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks" }
   #resource
   resources :user
   #routes
