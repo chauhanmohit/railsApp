@@ -111,6 +111,13 @@ app.controller('mainController',['$scope','$http','$q','$timeout',function($scop
     });
     
     /**
+     *	on marker click get event
+     **/
+    $scope.markers.on('click',function(e){
+	console.log("adsad",e);
+    });
+    
+    /**
      *	get the radius according to the viewport
      *	on initial map load
      **/

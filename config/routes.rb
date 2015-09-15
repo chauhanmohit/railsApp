@@ -3,8 +3,7 @@ Rails.application.routes.draw do
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-
-  # You can have the root of your site routed with "root"
+    # You can have the root of your site routed with "root"
   root 'map_page#index'
 
   ## for desktop or web user to hit the api for get request
@@ -17,7 +16,7 @@ Rails.application.routes.draw do
   get 'api/mobile/data' => 'api_handeler#mobileData'
   
   #users routes path
-  devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks" }
+  
   #resource
   resources :user
   #routes

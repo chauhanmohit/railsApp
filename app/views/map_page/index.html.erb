@@ -6,103 +6,116 @@
 
 <nav class="navbar navbar-inverse nav-bar-top navbar-fixed-top">
                <div class="container-fluid">
+           
                                   <div class="navbar-header">
-                                                <a class="navbar-brand logo-brand demo_logo" href="javascript:void(0);">Angular Demo App</a>
-                                  </div>
-                                                                                                    
-                                  <div id="navbar" class="navbar-collapse ">
-                                       <ul class="navbar-form nav navbar navbar-right">
-                                          <li class="src_rw_lst">
-                                            <div class="form-group">
-                                              <form novalidate ng-submit="getAddress()" >
-                                                   <p class="add">Address</p>
-                                                   <input type="text" class="form-control" ng-model="newPlaceAddress" class="form-control"  />
-                                                   <input type="submit" class="btn btn-warning" value="Show Location" ng-disabled="changePasswordForm.$invalid" />
-                                              </form>
-                                            </div>
-                                           </li>
-                                        <!--  <li>  <p class="add">Date</p> <div id="slider"></div></li> -->
-                                        <li>  <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">
+                                    <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">
                                         <button type="button" class="navbar-toggle tog_menu">
                                                    <span class="sr-only">Toggle navigation</span>
                                                    <span class="icon-bar"></span>
                                                    <span class="icon-bar"></span>
                                                    <span class="icon-bar"></span>
-                                                 </button></a></li>
+                                                 </button></a>
+                                    <a class="navbar-brand logo-brand demo_logo" href="javascript:void(0);">Chicago Police</a>
+                                  </div>
+                                                                                                    
+                                  <div id="navbar" class="navbar-collapse navbar-right">
+                                       <ul class="navbar-form nav navbar toolbar">
+                                          <li class="filter-section"><a href="#"><i class="fa fa-filter"></i></a></li>
+                                          <li><input type="search" id="search" placeholder="What are you looking for?"></li>
+                                          <li><button type="submit" id="btn-search"><i class="fa fa-search"></i></button></li>
                                        </ul>
                                   </div>
+                   
+
                </div>
 </nav>
+     <!--Tab section start here-->
 
-    <div id="wrapper">
+<div class="container-fluid">
+ <div class="row top-tabs">
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Map</a></li>
+      <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Trends</a></li>
+      <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">List</a></li>
+    </ul>
+  </div>
+</div>
+
+ <div id="wrapper">
 
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-	       <li>
-		  <div id="navbar" class="navbar-collapse collapse mobile_div">
-                                       <ul class="navbar-form nav navbar navbar-right">
-                                          <li>
-                                            <div class="form-group">
-                                              <form novalidate ng-submit="getAddress()" >
-                                                   <p class="add">Address</p>
-                                                   <input type="text" class="form-control" ng-model="newPlaceAddress" class="form-control" placeholder="Enter Address" />
-                                                   <input type="submit" class="btn btn-warning" value="Show Location" ng-disabled="changePasswordForm.$invalid" />
-                                              </form>
-                                            </div>
-                                           </li>
-                                        
-                                       </ul>
-                                  </div>	
-	       </li>
-                <li class="sidebar-brand">
-                  Filters
-                </li>
-                <li>
-                    <p class="add">Time line</p>
-                    <div id="slider"></div>
-                </li>
-                <li class="crm_type">
-                 <p class="add">Crime Type</p>
-                 <table>
-                     <tr ng-repeat="data in crimeType">
-                          <td>
-                             <label> <input type="checkbox" checklist-model="search.type" checklist-value="data"> {{data}} </label>
-                          </td>
-                     </tr>
-                 </table>
-                </li>
-                <li>
-                                  <table class="table table-hovered" >
-                                      <thead>
-                                       <tr>
-                                         <th class="col-xs-2">Crime Type</th>
-                                         <th class="col-xs-2">Arrest</th>
-                                         <th class="col-xs-2">Case Number</th> 
-                                         <th class="col-xs-6">Description</th>
-                                         <th class="col-xs-2">Date</th>
-                                      </tr>
-                                      </thead>
-                                  <tbody>
-                                      <tr ng-repeat="info in serverData" ng-click="moveToMarker($index)">
-                                         <td class="col-xs-2"><b>{{info.primary_type}}</b></td>
-                                         <td class="col-xs-2">{{info.arrest}}</td>
-                                         <td class="col-xs-2">{{info.case_number}}</td> 
-                                         <td class="col-xs-6">{{info.description}}</td>
-                                          <td class="col-xs-2">{{info.date | date:'mediumDate'}}</td>
-                                      </tr>
-                                   </tbody>
-                                  </table>				  
-                </li>
-               
-            </ul>  
+          <div class="top-wrapper-sidemenu"> 
+             <h1><img src="<%= image_path('mission-notive.png') %>">Crime Reports</h1>
+             <div class="col user-username">User Name</div>
+          </div>
+
+          <ul>
+            <a href="javascript:void(0);"><li><i class="fa fa-file"></i>Submit a Tip</li></a>
+            <a href="javascript:void(0);"><li><i class="fa fa-camera"></i>Register a Camera</li></a>
+            <a href="javascript:void(0);"><li><i class="fa fa-sliders"></i>Setting</li></a>
+            <a href="javascript:void(0);"><li><i class="fa fa-sign-in"></i>Sign Out</li></a>
+          </ul>
+
+
         </div>
         <!-- /#sidebar-wrapper -->
 
         <!-- Page Content -->
         <div id="page-content-wrapper">
-                    <div id="map"></div>
+            <div id="map"></div>
+            <span class="excalamation-iconed"><i class="icon-exclamation-sign"></i></span>
         </div>
+        
+
+
+
+        <section id="map-details">
+          <div class="container-fluid">
+
+            <div class="row">
+                <div class="map-popup">
+                  <button class="left_button"><a href="#"><i class="fa fa-caret-left"></i></a></button>
+                  <h3>3 Personal Crimes, 1 Property Crime</h3>
+                  <button class="right_button"><a href="#"><i class="fa fa-caret-right"></i></a></button>
+                </div>
+            </div>
+
+            <div class="row">
+              <div class="crime-info">
+                <ul>
+                  <li>
+                    <div class="col-md-1 user-info-icon">
+                      <img src="<%= image_path('map-user-crime.png') %>">             
+                    </div>
+                    <div class="col-md-10 user-desp-part">
+                      <h4>Assault</h4>
+                      <p>100 Block W Madison St (Sidewalk)<span>Theft over $500</span></p>
+                      <div class="table-user-info">
+                          <ul>
+                            <li><span>Date :</span> 25 Aug 2015</li>
+                            <li><span>Time :</span> 6:45 am</li>
+                            <li><span>Incident ID : </span> 2015309402</li>
+                            <li><span>Case Number : </span> 26453235F</li>
+                            <li><span>Agency : </span> Chicago Police Department</li>
+                            <li><span>Arest Made : </span> Yes</li>
+                          </ul>
+                      </div>
+                    </div>
+                    <div class="col-md-1 user-liking">
+                      <p>25 Aug 2015<span>6:45 am</span></p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+
+          </div>
+        </section>
+
+
+
         <!-- /#page-content-wrapper -->
    
     </div>
@@ -130,3 +143,12 @@
 });
  </script>
     
+<script type="text/javascript">
+( function() {
+  $('#btn-search').on('click', function(e) {
+    e.preventDefault();
+    $('#search').animate({width: 'toggle'}).focus();
+
+  });
+} () );
+</script>

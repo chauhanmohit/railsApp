@@ -26,8 +26,6 @@ gem 'kaminari' # adds pagination to ActiveModels
 
 
 ##social media gems
-gem 'devise'
-gem 'koala'
 gem 'twitter'
 gem 'linkedin'
 gem 'omniauth'

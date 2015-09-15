@@ -18,6 +18,7 @@ class UsersController < ApplicationController
   
   # show the user details after authentication
   def dashboard
+     
   end
   
   #register the new user
