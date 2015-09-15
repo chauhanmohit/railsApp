@@ -1,10 +1,12 @@
+
 <section ng-controller="mainController" ng-init="getData()">
 <div id="progress"><div id="progress-bar"><img src="<%= image_path("loader.gif") %>" alt="loader"/></div></div>
 <div class="customLoader" ng-show="showLoder">
 <img src="<%= image_path("loader.gif") %>" alt="loader"/>
 </div>
 
-<nav class="navbar navbar-inverse nav-bar-top navbar-fixed-top">
+<div id="wrapper" class="toggled">
+<nav class="navbar navbar-inverse nav-bar-top">
                <div class="container-fluid">
            
                                   <div class="navbar-header">
@@ -15,13 +17,13 @@
                                                    <span class="icon-bar"></span>
                                                    <span class="icon-bar"></span>
                                                  </button></a>
-                                    <a class="navbar-brand logo-brand demo_logo" href="javascript:void(0);">Chicago Police</a>
+                                    <a class="navbar-brand logo-brand demo_logo" href="javascript:void(0);"><img src="<%= image_path('chicago-logo.png') %>"></a>
                                   </div>
                                                                                                     
                                   <div id="navbar" class="navbar-collapse navbar-right">
                                        <ul class="navbar-form nav navbar toolbar">
                                           <li class="filter-section"><a href="#"><i class="fa fa-filter"></i></a></li>
-                                          <li><input type="search" id="search" placeholder="What are you looking for?"></li>
+                                          <li><input type="search" id="search" placeholder="Search an address"></li>
                                           <li><button type="submit" id="btn-search"><i class="fa fa-search"></i></button></li>
                                        </ul>
                                   </div>
@@ -34,14 +36,14 @@
 <div class="container-fluid">
  <div class="row top-tabs">
     <ul class="nav nav-tabs" role="tablist">
-      <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Map</a></li>
+      <li role="presentation" class="active"><%= link_to 'Map', {:controller => 'map_page', :action => 'index'} %></li>
       <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Trends</a></li>
-      <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">List</a></li>
+      <li role="presentation"><%= link_to 'List view', {:controller => 'map_page', :action => 'listView'} %></li>
     </ul>
   </div>
 </div>
 
- <div id="wrapper">
+ <div id="">
 
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
@@ -64,7 +66,7 @@
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <div id="map"></div>
-            <span class="excalamation-iconed"><i class="icon-exclamation-sign"></i></span>
+            <div class="exclamation-sign"><a href="#"><i class="fa fa-exclamation-circle"></i></a></div>            
         </div>
         
 
@@ -73,8 +75,8 @@
         <section id="map-details">
           <div class="container-fluid">
 
-            <div class="row">
-                <div class="map-popup">
+            <div class="row map-popup">
+                <div class="container">
                   <button class="left_button"><a href="#"><i class="fa fa-caret-left"></i></a></button>
                   <h3>3 Personal Crimes, 1 Property Crime</h3>
                   <button class="right_button"><a href="#"><i class="fa fa-caret-right"></i></a></button>
@@ -82,6 +84,7 @@
             </div>
 
             <div class="row">
+              <div class="container">
               <div class="crime-info">
                 <ul>
                   <li>
@@ -91,7 +94,7 @@
                     <div class="col-md-10 user-desp-part">
                       <h4>Assault</h4>
                       <p>100 Block W Madison St (Sidewalk)<span>Theft over $500</span></p>
-                      <div class="table-user-info">
+                      <!-- <div class="table-user-info">
                           <ul>
                             <li><span>Date :</span> 25 Aug 2015</li>
                             <li><span>Time :</span> 6:45 am</li>
@@ -100,15 +103,17 @@
                             <li><span>Agency : </span> Chicago Police Department</li>
                             <li><span>Arest Made : </span> Yes</li>
                           </ul>
-                      </div>
+                      </div> -->
                     </div>
                     <div class="col-md-1 user-liking">
                       <p>25 Aug 2015<span>6:45 am</span></p>
+                      <!-- <p class="comment-share"><a href="#"><img src="<%= image_path('tip-icon.png') %>"></a><a href="#"><i class="fa fa-share"></i></a></p> -->
                     </div>
                   </li>
                 </ul>
               </div>
             </div>
+          </div>
 
 
           </div>
@@ -122,12 +127,12 @@
     <!-- /#wrapper -->
     
     
-      
+   </div> 
+   
     
  </section>
  
  <script type="text/javascript">
-    $("#slider").dateRangeSlider();
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
@@ -148,7 +153,6 @@
   $('#btn-search').on('click', function(e) {
     e.preventDefault();
     $('#search').animate({width: 'toggle'}).focus();
-
   });
 } () );
 </script>

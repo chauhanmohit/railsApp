@@ -50,8 +50,13 @@ p.add {
     background-color: #f47e1f;
 }
 .nav-bar-top {
-    background: #0288d1 none repeat scroll 0 0;
-    border-bottom: medium none;
+  background: none repeat scroll 0 0 #0288d1;
+  border: medium none !important;
+  border-radius: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 99999;
 }
 .navbar-inverse .navbar-brand {
     color: #fff;
@@ -65,7 +70,7 @@ form.head-form input {
     width: 300px !important;
 }
 .navbar-brand.logo-brand.demo_logo {
-    margin-top: 6px;
+    margin-top: 0px;
 }
 .navbar-form .form-group {
     display: inline-block;
@@ -136,7 +141,7 @@ form.head-form input {
 #wrapper {
     margin-top: 0px;
     padding-left: 0;
-    transition: all 0.5s ease 0s;
+    transition: all 0.1s ease 0s;
 }
 #wrapper.toggled {
     padding-right: 250px;
@@ -148,10 +153,11 @@ form.head-form input {
     overflow-y: auto;
     position: fixed;
     left: 250px;
-    transition: all 0.5s ease 0s;
+    transition: all 0.1s ease 0s;
     width: 0;
+    border-right: 1px solid #ddd;
     z-index: 1000;
-    top: 103px;
+    top: 0px;
 }
 #wrapper.toggled #sidebar-wrapper {
     width: 380px;
@@ -496,7 +502,9 @@ section#register {
     text-decoration: none;
 }
 
-
+#map{
+  top: 100px;
+}
 
 
 
@@ -505,8 +513,9 @@ a{
 }
 .top-wrapper-sidemenu{
     background: url("../chicago-police.png") no-repeat;
+    background-size: contain;
     width: 100%;
-    height: 200px;
+    height: 150px;
     position: relative;
 }
 .top-wrapper-sidemenu h1 {
@@ -561,7 +570,7 @@ a{
   float: left;
   margin-bottom: 0;
   margin-right: 25px;
-  margin-top: 17px !important;
+  margin-top: 22px !important;
   padding: 9px 10px;
   position: relative;
 }
@@ -597,17 +606,18 @@ a{
     width: 177px;
 }
 
-.toolbar input[type="search"]::-webkit-input-placeholder { color: #353535; }
-.toolbar input[type="search"]::-moz-placeholder { color: #353535; opacity: 1; }
-.toolbar input[type="search"]:-moz-placeholder { color: #353535; opacity: 1; }
-.toolbar input[type="search"]:-ms-input-placeholder { color: #353535; }
+.toolbar input[type="search"]::-webkit-input-placeholder { color: #fff; }
+.toolbar input[type="search"]::-moz-placeholder { color: #fff; opacity: 1; }
+.toolbar input[type="search"]:-moz-placeholder { color: #fff; opacity: 1; }
+.toolbar input[type="search"]:-ms-input-placeholder { color: #fff; }
 .navbar-form.nav li input {
-  background: none repeat scroll 0 0 #fff !important;
-  border: medium none;
-  border-radius: 2px;
-  color: #353535;
+  background: none !important;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  color: #fff;
   height: 31px;
   width: 225px;
+  margin-left: 2px;
 }
 .navbar-form.nav.navbar.toolbar button {
   background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
@@ -656,8 +666,8 @@ a{
     text-align: center !important;
 }
 .top-tabs .nav-tabs > li > a{
-    color: #c7c7c7;
-    font-size: 16px;
+    color: #cfcfcf;
+    font-size: 15px;
     text-transform: uppercase;
 }
 .top-tabs .nav-tabs .active{
@@ -669,7 +679,7 @@ a{
   color: #fff !important;
 }
 .top-tabs .nav-tabs > li > a:hover{
-    background: none repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
+  background: none repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
   border: medium none !important;
   color: #fff !important;
 }
@@ -680,17 +690,15 @@ a{
   background: #fff;
   z-index: 9999;
 }
-.map-popup > button {
+.map-popup .container button {
   background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
   border: medium none;
 }
 .map-popup {
   background: none repeat scroll 0 0 #0288d1;
-  display: inline-block;
   padding: 8px;
-  width: 100%;
 }
-.map-popup > button a i{
+.map-popup .container button a i{
     color: #fff;
     font-size: 25px;
 }
@@ -721,6 +729,7 @@ a{
   padding: 0;
 }
 .col-md-1.user-info-icon {
+  padding-left: 0;
   padding-right: 0;
   width: 4%;
 }
@@ -732,8 +741,8 @@ a{
   margin-top: 0;
 }
 .col-md-10.user-desp-part p{
-    font-size: 15px;
-    line-height: 23px;
+    font-size: 14px;
+    line-height: 22px;
     margin-bottom: 0;
 }
 .col-md-10.user-desp-part p span{
@@ -750,17 +759,8 @@ a{
   display: block;
 }
 .col-md-1.user-liking {
+  padding-right: 0;
   width: 10%;
-}
-.excalamation-iconed {
-  bottom: 230px;
-  left: 40px;
-  z-index: 999999;
-  position: absolute;
-}
-.icon-exclamation-sign {
-  color: #0288d1;
-  font-size: 50px;
 }
 #page-content-wrapper{
     position: relative;
@@ -782,7 +782,257 @@ a{
   color: #646464;
   display: inline-block;
   font-weight: normal;
-  width: 9%;
+  width: 12%;
+}
+.user-liking p a {
+  background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+  color: #929497;
+  font-size: 22px;
+  position: relative;
+  top: 4px;
+}
+.user-liking p a:hover{
+  background: none;
+  color: #0389d1;
+}
+.user-liking p img {
+  margin-right: 18px;
+}
+.list-view .row {
+  margin: 0 -30px;
+}
+/*list page css start here*/
+.list-view {
+  padding-bottom: 20px;
+  padding-top: 100px;
+}
+.list-view .crime-info {
+  display: inline-block;
+  padding: 0px;
+  width: 100%;
+}
+.list-view .crime-info > ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.list-view .col-md-1.user-info-icon {
+  padding-left: 0;
+  padding-right: 0;
+  width: 4%;
+}
+.list-view .col-md-10.user-desp-part {
+  width: 85%;
+}
+.list-view .col-md-1.user-liking {
+  width: 11%;
+  padding-right: 0px;
+}
+.list-view .col-md-10.user-desp-part h4 {
+  margin-bottom: 5px;
+  margin-top: 0;
+}
+.list-view .col-md-10.user-desp-part h3 {
+  font-size: 15px;
+  line-height: 23px;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+.list-view .col-md-10.user-desp-part h3 span {
+  display: block;
+}
+.list-view .table-user-info {
+  display: inline-block;
+  margin-bottom: 10px;
+  margin-top: 18px;
+  width: 50%;
+}
+.list-view .table-user-info ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.list-view .table-user-info li {
+  color: #353535;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.list-view .table-user-info span {
+  color: #646464;
+  display: inline-block;
+  font-weight: normal;
+  width: 28%;
+}
+.list-view .crime-info li {
+  display: inline-block;
+  padding: 15px;
+  width: 100%;
+  border: 1px solid #ddd;
+  float: left;
+  border-bottom: none;
+  border-right: none;
+  border-left: none;
+}
+.list-view .crime-info li:nth-child(2n){
+  background: none repeat scroll 0 0 #fafafa;
+  border-left: 3px solid #bce19f;
+}
+.list-view .table-user-info li {
+  background: none repeat scroll 0 0 #fafafa;
+  border: 1px solid #ededed;
+  color: #353535;
+  float: none !important;
+  font-weight: bold;
+  margin-bottom: 0 !important;
+  padding: 10px !important;
+  border-bottom: none;
+  border-right: none;
+  border-left: none;
+
+}
+.nav > li > a:focus, .nav > li > a:hover {
+  border: medium none !important;
+  color: #fff !important;
+  outline: medium none !important;
+  text-decoration: none !important;
+  background: none !important;
+}
+.filter-section > a{
+  color: #fff !important;
+}
+
+
+/* Toggle Styles */
+
+#wrapper {
+    padding-left: 0;
+   /* -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;*/
+}
+
+#wrapper.toggled {
+    padding-left: 300px;
+}
+
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    left: 300px;
+    width: 0;
+    height: 100%;
+    margin-left: -300px;
+    overflow-y: auto;
+    overflow-x: hidden; 
+   /* -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;*/
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 300px;
+}
+
+#page-content-wrapper {
+    width: 100%;
+    position: absolute;
+    padding: 15px;
+}
+
+#wrapper.toggled #page-content-wrapper {
+    position: absolute;
+    margin-right: -300px;
+}
+
+/* Sidebar Styles */
+
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 300px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+}
+
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #999999;
+}
+
+.sidebar-nav li a:hover {
+    text-decoration: none;
+    color: #fff;
+    background: #fff;
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+    height: 65px;
+    font-size: 18px;
+    line-height: 60px;
+}
+
+.sidebar-nav > .sidebar-brand a {
+    color: #999999;
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+    color: #fff;
+    background: none;
+}
+
+@media(min-width:768px) {
+    #wrapper {
+        padding-left: 300px !important;
+    }
+
+    #wrapper.toggled {
+        padding-left: 0 !important;
+    }
+
+    #sidebar-wrapper {
+        width: 300px;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 0;
+    }
+
+    #page-content-wrapper {
+        padding: 0px;
+        position: relative;
+    }
+
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
+}
+
+.exclamation-sign {
+  bottom: 160px;
+  left: 20px;
+  position: fixed;
+}
+.exclamation-sign i{
+  color: #0288d1;
+  font-size: 40px;
+}
+.exclamation-sign > a {
+  background: none repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
 }
 
 
@@ -798,6 +1048,410 @@ a{
 
 
 
+
+
+
+
+
+/*custom css start here*/
+
+
+@media (min-width: 992px) and (max-width: 1199px){
+
+  .top-tabs .nav-tabs > li{
+    width: 15%;
+  }
+  .list-view .table-user-info{
+    width: 60%;
+  }
+  .col-md-10.user-desp-part {
+  width: 83%;
+}
+.col-md-1.user-liking {
+  width: 13%;
+}
+
+}
+
+@media (min-width: 768px) and (max-width: 991px){
+
+.top-tabs .nav-tabs > li{
+  width: 18%;
+}
+.list-view .col-md-1.user-info-icon {
+  float: left;
+  width: 6%;
+}
+.list-view .col-md-10.user-desp-part {
+  float: left;
+  width: 79%;
+}
+.list-view .col-md-1.user-liking {
+  float: right;
+  width: 15%;
+}
+.list-view .table-user-info{
+  width: 100%;
+}
+.list-view .row {
+  margin: 0 -15px;
+}
+.col-md-10.user-desp-part {
+  float: left;
+  width: 76%;
+}
+.col-md-1.user-liking {
+  float: right;
+  width: 17%;
+}
+.col-md-1.user-info-icon {
+  float: left;
+  width: 7%;
+}
+.table-user-info span{
+  width: 30%;
+}
+
+
+
+
+
+
+}
+
+@media (max-width: 767px){
+
+.top-tabs .nav-tabs > li {
+  width: 32%;
+}
+.navbar-toggle.tog_menu {
+  margin-left: 12px;
+  margin-right: 25px;
+  margin-top: 15px !important;
+  padding: 9px 10px;
+}
+.navbar-form.nav li{
+  margin-right: 0px;
+  float: left !important;
+}
+.navbar.navbar-inverse .navbar-collapse {
+  border: medium none;
+  float: right;
+  width: 50%;
+}
+.navbar-form.nav.navbar.toolbar{
+  float: right;
+}
+.navbar-form.nav li input{
+  width: 160px;
+  font-size: 12px;
+}
+.nav > li > a:focus, .nav > li > a:hover {
+  border: medium none !important;
+  color: #fff !important;
+  outline: medium none !important;
+  text-decoration: none !important;
+  background: none !important;
+}
+.filter-section > a{
+  color: #fff !important;
+}
+.row.top-tabs{
+  top: 50px;
+}
+.list-view {
+  padding-bottom: 10px;
+  padding-top: 44px;
+}
+.list-view .row {
+  margin: 0 -15px;
+}
+.list-view .col-md-1.user-info-icon {
+  float: left;
+  width: 7%;
+}
+.list-view .col-md-10.user-desp-part {
+  float: left;
+  width: 75%;
+}
+.list-view .col-md-1.user-liking {
+  float: right;
+  width: 18%;
+}
+.list-view .table-user-info{
+  width: 100%;
+}
+.list-view .col-md-10.user-desp-part h3 {
+  font-size: 13px;
+  line-height: 20px;
+}
+.list-view .col-md-10.user-desp-part h4{
+  font-size: 16px;
+}
+.col-md-1.user-liking > p {
+  font-size: 13px;
+  line-height: 20px;
+}
+.user-liking p img {
+  margin-right: 13px;
+}
+.col-md-1.user-liking {
+  float: right;
+  width: 21%;
+}
+.col-md-10.user-desp-part {
+  float: left;
+  width: 70%;
+}
+.col-md-1.user-info-icon {
+  float: left;
+  width: 8%;
+}
+.table-user-info span{
+  width: 40%;
+}
+#map {
+  top: 40px;
+  position: relative;
+}
+#page-content-wrapper{
+  padding: 0px;
+}
+.navbar-brand > img {
+  display: block;
+  width: 150px;
+}
+.navbar-form{
+  box-shadow: none !important;
+}
+
+
+}
+
+
+@media (max-width: 480px){
+
+  .top-tabs .nav-tabs > li > a{
+    font-size: 12px;
+  }
+.navbar.navbar-inverse .navbar-collapse {
+  border: medium none !important;
+  float: right;
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+  padding-top: 5px;
+  width: 55%;
+}
+#sidebar-wrapper{
+  top: 0px;
+}
+.top-wrapper-sidemenu h1 {
+  color: #fff;
+  font-size: 16px;
+  margin-top: 0;
+  padding: 20px 10px;
+}
+.top-wrapper-sidemenu {
+  background: url("../chicago-police.png") no-repeat scroll 0 0 / contain  rgba(0, 0, 0, 0);
+  position: relative;
+  width: 100%;
+  height: 140px;
+}
+.col.user-username {
+  bottom: 10px;
+  color: #fff;
+  font-size: 13px;
+  left: 12px;
+  position: absolute;
+  width: 100%;
+}
+#sidebar-wrapper ul a{
+  font-size: 13px;
+}
+.list-view{
+  padding-top: 40px;
+}
+.comment-share img {
+  width: 18px;
+}
+.user-liking p a{
+  font-size: 13px;
+}
+.list-view .col-md-1.user-liking {
+  float: right;
+  width: 28%;
+  padding-left: 0px;
+}
+.list-view .col-md-10.user-desp-part {
+  float: left;
+  width: 62%;
+}
+.list-view .col-md-1.user-info-icon {
+  float: left;
+  width: 10%;
+}
+.col-md-1.user-info-icon > img {
+  width: 100%;
+}
+.list-view .col-md-10.user-desp-part h4{
+  font-size: 14px;
+}
+.list-view .col-md-10.user-desp-part h3 {
+  font-size: 12px;
+  line-height: 17px;
+}
+.col-md-1.user-liking > p {
+  font-size: 12px;
+  line-height: 19px;
+}
+.list-view .table-user-info span{
+  width: 36%;
+}
+.list-view .table-user-info {
+  width: 280px;
+}
+.list-view .table-user-info li{
+  font-size: 11px;
+}
+.list-view .crime-info li{
+  padding: 10px;
+}
+.navbar-form.nav li input {
+  font-size: 12px;
+  width: 32px;
+  z-index: 99999 !important;
+}
+.navbar-form.nav.navbar.toolbar .fa.fa-filter {
+  font-size: 14px;
+  padding: 7px 10px;
+}
+.navbar-form.nav.navbar.toolbar button i {
+  font-size: 14px;
+  padding: 5px 0;
+}
+.navbar-toggle.tog_menu {
+  border: medium none !important;
+  margin-left: 7px;
+  margin-right: 20px;
+  margin-top: 15px !important;
+  padding: 6px 5px;
+}
+.navbar-toggle .icon-bar {
+  height: 2px;
+  width: 18px;
+}
+.navbar-brand {
+  font-size: 16px;
+  padding: 15px 10px;
+}
+.navbar-form.nav li input {
+  font-size: 12px;
+  width: 100px;
+}
+.col-md-10.user-desp-part p {
+  font-size: 12px;
+  line-height: 18px;
+  margin-bottom: 0;
+}
+.col-md-10.user-desp-part h4 {
+  font-size: 15px;
+}
+.col-md-10.user-desp-part {
+  float: left;
+  width: 57%;
+}
+.col-md-1.user-info-icon {
+  float: left;
+  width: 10%;
+}
+.col-md-1.user-liking {
+  float: right;
+  padding-left: 0;
+  width: 33%;
+}
+.map-popup h3 {
+  color: #fff;
+  float: left;
+  font-size: 15px;
+  margin: 0;
+  padding-left: 7px;
+  padding-top: 4px;
+  width: 90%;
+}
+.table-user-info span {
+  width: 33%;
+}
+.table-user-info {
+  margin-top: 10px;
+  width: 280px;
+}
+.table-user-info li{
+  font-size: 11px;
+}
+#wrapper.toggled #sidebar-wrapper{
+  width: 280px;
+}
+#sidebar-wrapper {
+  height: 100%;
+  left: 280px;
+  margin-left: -280px;
+  overflow-y: auto;
+  position: fixed;
+  /*transition: all 0.5s ease 0s;*/
+  width: 0;
+  z-index: 1000;
+}
+#wrapper.toggled {
+  padding-left: 280px;
+}
+#wrapper{
+  padding-left: 0px;
+}
+.navbar-form{
+  box-shadow: none !important;
+}
+.navbar-brand > img {
+  display: block;
+  width: 135px;
+}
+
+
+}
+
+@media (max-width: 320px){
+  .list-view .table-user-info{
+    width: 250px;
+  }
+  .list-view .table-user-info span{
+  width: 42%;
+}
+.navbar-form.nav li input {
+  font-size: 12px;
+  width: 78px;
+}
+.map-popup h3 {
+  color: #fff;
+  float: left;
+  font-size: 13px;
+  margin: 0;
+  padding-left: 5px;
+  padding-top: 5px;
+  width: 89%;
+}
+.table-user-info {
+  margin-top: 10px;
+  width: 260px;
+}
+.table-user-info span {
+  width: 38%;
+}
+.navbar-brand > img {
+  display: block;
+  width: 118px;
+}
+
+
+}
 
 
 

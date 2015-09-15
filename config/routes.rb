@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
     # You can have the root of your site routed with "root"
   root 'map_page#index'
-
+  get 'map/listView' => 'map_page#listView'
   ## for desktop or web user to hit the api for get request
   get 'api/web/data' => 'api_handeler#data'
   
