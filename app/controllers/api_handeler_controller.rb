@@ -45,7 +45,7 @@ class ApiHandelerController < ApplicationController
     end
   end
   
-  def getTableContent
+  def getlistViewContent
     @lat = params[:lat]
     @lang = params[:lang]
     @radius = params[:radius]
@@ -58,7 +58,7 @@ class ApiHandelerController < ApplicationController
     if @lat && @lang && @radius
       client = SODA::Client.new({ :domain => 'data.cityofchicago.org', :app_token => 'v1SkHrbzQcyFmlkL9D5W1UXfT' })
       @response = client.get('6zsd-86xi',
-                              {"$select" => "arrest,case_number,date,description,location_description,latitude, longitude, primary_type, id",
+                              {
                               "$where" => "within_circle(location, #{@lat}, #{@lang}, #{@radius}) AND
                                            date > '#{@from}' AND date < '#{@to}' And
                                            (primary_type = '#{crimeType[0]}' OR primary_type = '#{crimeType[1]}'
@@ -68,6 +68,7 @@ class ApiHandelerController < ApplicationController
                               "arrest"=>"#{@arrest}",
                               }
                             )
+      #"$select" => "arrest,case_number,date,description,location_description,latitude, longitude, primary_type, id",
       respond_to do |format|
         format.json { render :json => @response }
       end 
@@ -80,6 +81,7 @@ class ApiHandelerController < ApplicationController
   end
   
   def mobileData
+    headers['Access-Control-Allow-Origin'] = '*'
     @lat = params[:lat]
     @lang = params[:lang]
     @radius = params[:radius]

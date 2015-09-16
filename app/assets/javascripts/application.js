@@ -22,5 +22,7 @@
 //= require checklistModel
 //= require map_page
 //= require MainController
+//= require listViewController
+//= require appFactory
 
 //= require_tree .
