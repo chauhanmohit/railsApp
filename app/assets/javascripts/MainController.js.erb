@@ -3,6 +3,7 @@ app.controller('mainController',['$scope','$http','$q','$timeout','ApiParams',fu
     var canceller ;
     var marker ;
     var markerList = [];
+    var allApiData = [];
     $scope.newPlaceAddress = '' ;
     $scope.crimeType = ["THEFT","ASSAULT","BATTERY","ROBBERY"] ;
     $scope.isApiHitOnZoom = true ;
@@ -15,7 +16,11 @@ app.controller('mainController',['$scope','$http','$q','$timeout','ApiParams',fu
 	'type': ["THEFT","ASSAULT","BATTERY","ROBBERY"],
 	'arrest': 'true', 
     } ;
-
+    $scope.clickedMarkerData = {arrest : '',beat : '',block : '',case_number : '',community_area : '',
+		    date : '',description : '',district : '',domestic : '',fbi_code : '',id : '',iucr : '',latitude : '',
+		    location : '',location_description : '',longitude : '',primary_type : '',updated_on : '',
+		    ward : '',x_coordinate : '',isDateShow : ''
+	    };
     /**
      *	using mapbox.js server tiles for the Map
      **/
@@ -62,6 +67,7 @@ app.controller('mainController',['$scope','$http','$q','$timeout','ApiParams',fu
      *  and show the location on map.
      **/
     $scope.getAddress = function(){
+    console.log("comes in the address function ");
         if ($scope.newPlaceAddress != null || $scope.newPlaceAddress !== undefined) {
             var address = $scope.newPlaceAddress ? $scope.newPlaceAddress : "Chicago" ;
             geocoder.geocode( { 'address': address}, function(results, status) {
@@ -109,14 +115,7 @@ app.controller('mainController',['$scope','$http','$q','$timeout','ApiParams',fu
 	    $scope.$apply();
 	}
     });
-    
-    /**
-     *	on marker click get event
-     **/
-    $scope.markers.on('click',function(e){
-	console.log("adsad",e, ApiParams.getData());
-    });
-    
+
     /**
      *	get the radius according to the viewport
      *	on initial map load
@@ -137,6 +136,11 @@ app.controller('mainController',['$scope','$http','$q','$timeout','ApiParams',fu
      **/
     $scope.getData = function (){
 	$scope.getRadiusOnLoad();
+	$scope.clickedMarkerData = {arrest : '',beat : '',block : '',case_number : '',community_area : '',
+		   date : '',description : '',district : '',domestic : '',fbi_code : '',id : '',iucr : '',latitude : '',
+		   location : '',location_description : '',longitude : '',primary_type : '',updated_on : '',
+		   ward : '',x_coordinate : '',isDateShow : ''
+	   };
         if (typeof $scope.search.lat == undefined || !$scope.search.lat ) $scope.search.lat = 41.8838113  ;
         if (typeof $scope.search.lang == undefined || !$scope.search.lang ) $scope.search.lang = -87.6317489 ;
         if (typeof $scope.search.radius == undefined || !$scope.search.radius ) $scope.search.radius = 500 ;
@@ -168,22 +172,21 @@ app.controller('mainController',['$scope','$http','$q','$timeout','ApiParams',fu
         $http.get('/api/web/data.json?lat='+$scope.search.lat+'&lang='+$scope.search.lang+'&radius='+$scope.search.radius+'&from='+$scope.search.from+'&to='+$scope.search.to+'&type='+$scope.search.type+'&arrest='+$scope.search.arrest ,
 	{ timeout: canceller.promise })
         .success(function(res,status,config,header){
+     	    allApiData = [];
+	    sameLocationPinList = [];
+	    allApiData = res;
 	    $scope.serverData = res ;    
 	    $scope.removeOldMarkers();    
             for (var i = 0; i < res.length; i++) {
-	        setTimeout((function(x){
-		    var response = getContent(res[x]);
-		    var image = res[x].primary_type == 'ASSAULT' ? redIcon : res[x].primary_type == 'ROBBERY' ? orangeIcon : res[x].primary_type == 'BATTERY' ? purpleIcon : res[x].primary_type == 'BATTERY' ? defaultIcon: greenIcon ;
-		    var marker = L.marker(new L.LatLng(res[x].latitude, res[x].longitude),{icon: image});
-		    marker.bindPopup(response);
-		    if (marker !== null) $scope.markers.removeLayer(marker);
-		    markerList.push(marker);
-		})(i), 1);
+		var response = getContent(res[i]);
+		var image = res[i].primary_type == 'ASSAULT' ? redIcon : res[i].primary_type == 'ROBBERY' ? orangeIcon : res[i].primary_type == 'BATTERY' ? purpleIcon : res[i].primary_type == 'BATTERY' ? defaultIcon: greenIcon ;
+		var marker = L.marker(new L.LatLng(res[i].latitude, res[i].longitude),{icon: image});
+		marker.index = i ;
+		marker.on('click',markerClick);
+		$scope.markers.addLayer(marker);
             }
-	    $scope.markers.addLayers(markerList);
             $scope.map.addLayer($scope.markers);
 	    $scope.showLoder = false ;
-	    console.log("$scope.search",$scope.search);
 	    ApiParams.setData($scope.search);
 	}).error(function(err,status,config,header){
 	    $scope.showLoder = false ;
@@ -203,55 +206,6 @@ app.controller('mainController',['$scope','$http','$q','$timeout','ApiParams',fu
 	$scope.markers.clearLayers();
 	markerList = [] ;
     }
-    
-    /**
-     *	Move to marker on click of the tabel conetent
-     **/
-    $scope.moveToMarker = function(id){
-	$scope.isApiHitOnZoom = false;
-	$scope.map.panTo(new L.LatLng(markerList[id].getLatLng().lat, markerList[id].getLatLng().lng));
-	$timeout(function() {
-	    $scope.map.setZoom(18);
-		$timeout(function() {
-		    //$scope.markers.options.singleMarkerMode = true ;
-		    markerList[id].openPopup();
-		    $scope.isApiHitOnZoom = true
-		}, 500);
-	}, 500);
-    }
-    
-    /**
-     *	get the radius according to the viewport
-     *	for the api hit to get content for the table data
-     **/
-    function getRadiusForTabelContentApiHit() {
-	var ne = $scope.map.getBounds()._northEast ;
-	var pos = $scope.map.getCenter();
-	var center = {'lat':pos.lat, 'lng': pos.lng}
-	var distance = getDistance(center, ne);
-	var cal = parseFloat((distance*10)/100) ;
-	var radius = 2 * parseFloat(distance + cal)  ;
-	return radius ;
-    }
-    
-    
-    /**
-     *	create another method to get 
-     *  from api to show in table
-     *  according to raidus get from screen viewport
-     **/
-    $scope.getTableContent = function (){
-	var radius = getRadiusForTabelContentApiHit();
-	$scope.serverData = [] ;
-	$http.get('/api/web/getTableContent.json?lat='+$scope.search.lat+'&lang='+$scope.search.lang+'&radius='+radius+'&from='+$scope.search.from+'&to='+$scope.search.to+'&type='+$scope.search.type+'&arrest='+$scope.search.arrest ,
-	{ timeout: canceller.promise })
-	.success(function(res,status,config,header){
-	    $scope.serverData = res ;    
-	}).error(function(err,status,config,header){
-	    console.log("Something happend wrong at serverEnd");
-	});
-    }
-    
     
     /**
      *  Customized the data for the onclick
@@ -302,6 +256,61 @@ app.controller('mainController',['$scope','$http','$q','$timeout','ApiParams',fu
 	var d = (R * c) ;
 	return d; // returns the distance in meters
     }
+    
+    /**
+     *	Bottom card data functionality
+     *	code starts from here
+     */
+    
+    $scope.disableNextPrevButton = 'true';
+    $scope.sameLocationMarkerLength = '';
+    var sameLocationPinList = [];
+    function markerClick(e) {
+	if ($scope.map.getZoom() >= 16) {
+	    sameLocationPinList = [];
+	    for ( var i = 0; i < allApiData.length; i++) {
+		if (allApiData[e.target.index].latitude == allApiData[i].latitude
+			&& allApiData[e.target.index].longitude == allApiData[i].longitude) {
+		    sameLocationPinList
+			    .push(allApiData[i]);
+		}
+	    }
+	    if (sameLocationPinList.length > 1) {
+		$scope.disableNextPrevButton = 'false';
+		$scope.sameLocationMarkerLength = sameLocationPinList.length + ' Personal Crimes';
+		$scope.clickedMarkerData = sameLocationPinList[0]
+		clickedMarkerIndex = 0;
+	    } else {
+		$scope.sameLocationMarkerLength = '1 Personal Crime';
+		$scope.disableNextPrevButton = 'true';
+		$scope.clickedMarkerData = allApiData[e.target.index];
+	    }
+	    $scope.$apply();
+	}
+    }
+
+    /**
+     * Card previous button click
+     */
+    $scope.previousMarker = function() {
+	if (clickedMarkerIndex > 0) {
+	    clickedMarkerIndex--;
+	    $scope.clickedMarkerData = sameLocationPinList[clickedMarkerIndex];
+	    $scope.$digest();
+	}
+    };
+
+    /**
+     * Card next button click
+     */
+    $scope.nextMarker = function() {
+	if (clickedMarkerIndex < sameLocationPinList.length - 1) {
+	    clickedMarkerIndex++;
+	    $scope.clickedMarkerData = sameLocationPinList[clickedMarkerIndex];
+	    $scope.$digest();
+	}
+    };
+    
     
     /**
      *	jquery code for the Date rage picker slider

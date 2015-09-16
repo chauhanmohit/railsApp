@@ -4,78 +4,57 @@
 
  <div id="mapPage">
 
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-          <div class="top-wrapper-sidemenu"> 
-             <h1><img src="<%= image_path('mission-notive.png') %>">Crime Reports</h1>
-             <div class="col user-username">User Name</div>
-          </div>
-
-          <ul>
-            <a href="javascript:void(0);"><li><i class="fa fa-file"></i>Submit a Tip</li></a>
-            <a href="javascript:void(0);"><li><i class="fa fa-camera"></i>Register a Camera</li></a>
-            <a href="javascript:void(0);"><li><i class="fa fa-sliders"></i>Setting</li></a>
-            <a href="javascript:void(0);"><li><i class="fa fa-sign-in"></i>Sign Out</li></a>
-          </ul>
-
-
-        </div>
-        <!-- /#sidebar-wrapper -->
-
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <div id="map"></div>
             <div class="exclamation-sign"><a href="#"><i class="fa fa-exclamation-circle"></i></a></div>            
         </div>
-        
+
+        <section id="map-details" ng-show="clickedMarkerData.arrest !== '' ">
+               <div class="container-fluid">
+               
+                              <div class="row map-popup">
+                                  <div class="container">
+                                    <button class="left_button" ng-click="previousMarker()" ng-show="disableNextPrevButton == false"><a href="javascript:void(0);"><i class="fa fa-caret-left"></i></a></button>
+                                    <h3>{{saneLocationMarkerLength}}</h3>
+                                    <button class="right_button" ng-click="NextMarker()" ng-show="disableNextPrevButton == false"><a href="javascript:void(0);"><i class="fa fa-caret-right"></i></a></button>
+                                  </div>
+                              </div>
+               
+                              <div class="row">
+                                <div class="container">
+                                <div class="crime-info">
+                                  <ul>
+                                    <li>
+                                      <div class="col-md-1 user-info-icon">
+                                        <img src="<%= image_path('map-user-crime.png') %>">             
+                                      </div>
+                                      <div class="col-md-10 user-desp-part">
+                                        <h4>{{clickedMarkerData.primary_type}}</h4>
+                                        <!--<p>{{clickedMarkerData.block}} <span>({{clickedMarkerData.description}})</span></p>-->
+                                         <div class="table-user-info">
+                                            <ul>
+                                              <li><span>Date :</span> {{(clickedMarkerData.date | date:'yyyy-MM-dd')}}</li>
+                                              <li><span>Time :</span> {{(clickedMarkerData.date | date:'hh:mm:ss a')}}</li>
+                                              <li><span>Incident ID : </span> {{clickedMarkerData.id}}</li>
+                                              <li><span>Case Number : </span> {{clickedMarkerData.case_number}}</li>
+                                              <li><span>Agency : </span> Chicago Police Department</li>
+                                              <li><span>Arest Made : </span> {{clickedMarkerData.arrest}}</li>
+                                            </ul>
+                                        </div> 
+                                      </div>
+                                      <div class="col-md-1 user-liking">
+                                        <p>{{(clickedMarkerData.date | date:'yyyy-MM-dd')}}<span>{{(clickedMarkerData.date | date:'hh:mm:ss a')}}</span></p>
+                                         <p class="comment-share"><a href="#"><img src="<%= image_path('tip-icon.png') %>"></a><a href="javascript:void(0);"><i class="fa fa-share"></i></a></p> 
+                                      </div>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
+                             </div>
 
 
-
-        <section id="map-details">
-          <div class="container-fluid">
-
-            <div class="row map-popup">
-                <div class="container">
-                  <button class="left_button"><a href="#"><i class="fa fa-caret-left"></i></a></button>
-                  <h3>3 Personal Crimes, 1 Property Crime</h3>
-                  <button class="right_button"><a href="#"><i class="fa fa-caret-right"></i></a></button>
-                </div>
-            </div>
-
-            <div class="row">
-              <div class="container">
-              <div class="crime-info">
-                <ul>
-                  <li>
-                    <div class="col-md-1 user-info-icon">
-                      <img src="<%= image_path('map-user-crime.png') %>">             
-                    </div>
-                    <div class="col-md-10 user-desp-part">
-                      <h4>Assault</h4>
-                      <p>100 Block W Madison St (Sidewalk)<span>Theft over $500</span></p>
-                      <!-- <div class="table-user-info">
-                          <ul>
-                            <li><span>Date :</span> 25 Aug 2015</li>
-                            <li><span>Time :</span> 6:45 am</li>
-                            <li><span>Incident ID : </span> 2015309402</li>
-                            <li><span>Case Number : </span> 26453235F</li>
-                            <li><span>Agency : </span> Chicago Police Department</li>
-                            <li><span>Arest Made : </span> Yes</li>
-                          </ul>
-                      </div> -->
-                    </div>
-                    <div class="col-md-1 user-liking">
-                      <p>25 Aug 2015<span>6:45 am</span></p>
-                      <!-- <p class="comment-share"><a href="#"><img src="<%= image_path('tip-icon.png') %>"></a><a href="#"><i class="fa fa-share"></i></a></p> -->
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-
-          </div>
+               </div>
         </section>
 
 

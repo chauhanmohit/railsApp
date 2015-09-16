@@ -28,7 +28,7 @@ body {
 .customLoader {
     left: 43%;
     position: absolute;
-    top: 25%;
+    top: 27%;
     z-index: 99999;
 }
 .cluster:hover > img {
@@ -130,7 +130,7 @@ form.head-form input {
     left: 1%;
     margin: 0 auto;
     position: fixed;
-    top: 21%;
+    top: 26%;
     width: 120px;
     z-index: 99999;
 }
@@ -1023,9 +1023,9 @@ a{
 }
 
 .exclamation-sign {
-  bottom: 160px;
-  right: 20px;
-  position: fixed;
+    bottom: 5%;
+    position: fixed;
+    right: 5%;
 }
 .exclamation-sign i{
   color: #0288d1;
@@ -1034,10 +1034,12 @@ a{
 .exclamation-sign > a {
   background: none repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
 }
-.filter-desp{
+.filter-desp {
     background: #fff;
     position: absolute;
-    right: 0;
+    right: 10px;
+    width: 200px;
+    border-radius: 5px;
 }
 .filter-section{
     position: relative;
@@ -1047,17 +1049,33 @@ a{
     padding: 0;
     margin: 0;
 }
-.filter-desp li.sidebar-brand {
+.filter-desp li {
     font-size: 16px;
-    height: 40px;
-    line-height: 22px;
-    padding: 10px 17px;
+    height: auto;
+    line-height: 20px;
+    padding: 0px 17px;
     text-indent: 0;
-    color: #fff;
+    color: #000 !important;
+    float: none !important;
+    display: inline-block;
+    width: 100%;
 }
-
-
-
+.crm_type table{
+    display: inline-block;
+    width: 100%;
+}
+.horrible-input {
+    width: auto !important;
+    height: auto !important;
+    vertical-align: text-bottom;
+}
+p.add{
+    color: #000 !important;
+    margin-bottom: 10px;
+}
+.ui-rangeSlider {
+    margin: -20px auto 0 !importants;
+}
 
 
 

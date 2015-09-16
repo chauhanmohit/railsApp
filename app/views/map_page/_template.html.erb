@@ -20,14 +20,12 @@
                                                                                                     
                                   <div id="navbar" class="navbar-collapse navbar-right">
                                        <ul class="navbar-form nav navbar toolbar">
-                                          <li class="filter-section"><a href="#"><i class="fa fa-filter"></i></a>
-                                          <div class="filter-desp">
+                                          <li class="filter-section"><a class="filter-added" href="#"><i class="fa fa-filter"></i></a>
+                                          <div class="filter-desp" style="display: none;">
                                              <ul>
-                                                <li class="sidebar-brand">
-                                                            Filters
-                                                </li>
+                                                            <li><p class="add">Time line</p></li>
                                                 <li>
-                                                              <p class="add">Time line</p>
+                                                              
                                                               <div id="slider"></div>
                                                           </li>
                                                           <li class="crm_type">
@@ -35,7 +33,7 @@
                                                            <table>
                                                                <tr ng-repeat="data in crimeType">
                                                                     <td>
-                                                                       <label> <input type="checkbox" checklist-model="search.type" checklist-value="data"> {{$index}} </label>
+                                                                       <label> <input class="horrible-input" type="checkbox" checklist-model="search.type" checklist-value="data"> {{data}} </label>
                                                                     </td>
                                                                </tr>
                                                            </table>
@@ -43,8 +41,13 @@
                                              </ul>
                                           </div>
                                           </li>
-                                          <li><input type="search" id="search" placeholder="Search an address"></li>
-                                          <li><button type="submit" id="btn-search"><i class="fa fa-search"></i></button></li>
+                                          <li>
+                                             <form ng-submit="getAddress()">
+                                                            <input type="search" id="search" placeholder="Search an address" ng-model="newPlaceAddress" />
+                                                            <input type="submit" style="display: none;" />
+                                             </form>
+                                          </li>
+                                          <li><button id="btn-search"><i class="fa fa-search"></i></button></li>
                                        </ul>
                                   </div>
                    
@@ -89,6 +92,13 @@ $(selector).on('click', function(){
 });                      
 </script>
 
+<script>
+$(document).ready(function(){
+    $(".filter-added").click(function(){
+        $(".filter-desp").slideToggle();
+    });
+});
+</script>
 
 
 
