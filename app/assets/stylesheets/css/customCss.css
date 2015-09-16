@@ -1024,7 +1024,7 @@ a{
 
 .exclamation-sign {
   bottom: 160px;
-  left: 20px;
+  right: 20px;
   position: fixed;
 }
 .exclamation-sign i{
@@ -1034,9 +1034,27 @@ a{
 .exclamation-sign > a {
   background: none repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
 }
-
-
-
+.filter-desp{
+    background: #fff;
+    position: absolute;
+    right: 0;
+}
+.filter-section{
+    position: relative;
+}
+.filter-desp ul{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.filter-desp li.sidebar-brand {
+    font-size: 16px;
+    height: 40px;
+    line-height: 22px;
+    padding: 10px 17px;
+    text-indent: 0;
+    color: #fff;
+}
 
 
 

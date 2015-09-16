@@ -1,0 +1,60 @@
+<section ng-controller="TrendsController">
+  <%= render 'template' %>
+  
+  <div id="page-content-wrapper">    
+    <div class="container">
+      <div class="list-view">
+        <div class="row">
+          <div class="card">
+                  <div class="item item-divider">Chart for Week</div>
+                  <div class="item item-text-wrap">
+                          <canvas id="line" class="chart chart-line" data="graphWeek.data"
+                                  labels="graphWeek.labels" options="{showTooltips: false}"></canvas>
+                  </div>
+          </div>
+          <div class="card">
+                  <div class="item item-divider">Chart for Day</div>
+                  <div class="item item-text-wrap">
+                          <canvas id="line" class="chart chart-line" data="graphDay.data"
+                                  labels="graphDay.labels" options="{showTooltips: false}"></canvas>
+                  </div>
+          </div>
+          <div class="card last-cards">
+                  <div class="item item-divider">Chart for Month</div>
+                  <div class="item item-text-wrap">
+                          <canvas id="line" class="chart chart-line" data="graphMonth.data"
+                                  labels="graphMonth.labels" options="{showTooltips: false}"></canvas>
+                  </div>
+          </div>         
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+ <script type="text/javascript">
+    $("#slider").dateRangeSlider();
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    
+    $(function () {
+      $('input,textarea').focus(function () {
+          $(this).data('placeholder', $(this).attr('placeholder'))
+                 .attr('placeholder', '');
+      }).blur(function () {
+          $(this).attr('placeholder', $(this).data('placeholder'));
+      });
+    });
+    
+    ( function() {
+      $('#btn-search').on('click', function(e) {
+        e.preventDefault();
+        $('#search').animate({width: 'toggle'}).focus();
+    
+      });
+    } () );
+    
+ </script>

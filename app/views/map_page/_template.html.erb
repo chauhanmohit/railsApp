@@ -1,0 +1,107 @@
+<div id="progress"><div id="progress-bar"><img src="<%= image_path("loader.gif") %>" alt="loader"/></div></div>
+<div class="customLoader" ng-show="showLoder">
+<img src="<%= image_path("loader.gif") %>" alt="loader"/>
+</div>
+
+<div id="wrapper" class="toggled">
+<nav class="navbar navbar-inverse nav-bar-top">
+               <div class="container-fluid">
+           
+                                  <div class="navbar-header">
+                                    <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">
+                                        <button type="button" class="navbar-toggle tog_menu">
+                                                   <span class="sr-only">Toggle navigation</span>
+                                                   <span class="icon-bar"></span>
+                                                   <span class="icon-bar"></span>
+                                                   <span class="icon-bar"></span>
+                                                 </button></a>
+                                    <a class="navbar-brand logo-brand demo_logo" href="/"><img src="<%= image_path('chicago-logo.png') %>"/></a>
+                                  </div>
+                                                                                                    
+                                  <div id="navbar" class="navbar-collapse navbar-right">
+                                       <ul class="navbar-form nav navbar toolbar">
+                                          <li class="filter-section"><a href="#"><i class="fa fa-filter"></i></a>
+                                          <div class="filter-desp">
+                                             <ul>
+                                                <li class="sidebar-brand">
+                                                            Filters
+                                                </li>
+                                                <li>
+                                                              <p class="add">Time line</p>
+                                                              <div id="slider"></div>
+                                                          </li>
+                                                          <li class="crm_type">
+                                                           <p class="add">Crime Type</p>
+                                                           <table>
+                                                               <tr ng-repeat="data in crimeType">
+                                                                    <td>
+                                                                       <label> <input type="checkbox" checklist-model="search.type" checklist-value="data"> {{$index}} </label>
+                                                                    </td>
+                                                               </tr>
+                                                           </table>
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          </li>
+                                          <li><input type="search" id="search" placeholder="Search an address"></li>
+                                          <li><button type="submit" id="btn-search"><i class="fa fa-search"></i></button></li>
+                                       </ul>
+                                  </div>
+                   
+
+               </div>
+</nav>
+     <!--Tab section start here-->
+ <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+          <div class="top-wrapper-sidemenu"> 
+             <h1><img src="<%= image_path('mission-notive.png') %>">Crime Reports</h1>
+             <div class="col user-username">User Name</div>
+          </div>
+
+          <ul>
+            <a href="javascript:void(0);"><li><i class="fa fa-file"></i>Submit a Tip</li></a>
+            <a href="javascript:void(0);"><li><i class="fa fa-camera"></i>Register a Camera</li></a>
+            <a href="javascript:void(0);"><li><i class="fa fa-sliders"></i>Setting</li></a>
+            <a href="javascript:void(0);"><li><i class="fa fa-sign-in"></i>Sign Out</li></a>
+          </ul>
+
+
+        </div>
+        <!-- /#sidebar-wrapper -->
+        
+<div class="container-fluid">
+ <div class="row top-tabs">
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation"><%= link_to 'Map', {:controller => 'map_page', :action => 'index'} %></li>
+      <li role="presentation"><%= link_to 'Trend view', {:controller => 'map_page', :action => 'trendsView'} %></li>
+      <li role="presentation"><%= link_to 'List view', {:controller => 'map_page', :action => 'listView'} %></li>
+    </ul>
+  </div>
+</div>
+
+<script>
+$("#slider").dateRangeSlider();
+var selector = '.nav li';
+$(selector).on('click', function(){
+    $(selector).removeClass('active');
+    $(this).addClass('active');
+});                      
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

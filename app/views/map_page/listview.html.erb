@@ -1,0 +1,73 @@
+<section ng-controller="ListViewContoller" ng-init="listViewAction()">
+<%= render 'template' %> 
+
+ <div id="listViewPage">
+       
+      <div id="page-content-wrapper">
+          <div class="container">
+          <div class="list-view">
+            <div class="row">
+              <div class="crime-info">
+                <ul>
+                  <li ng-repeat = "data in listViewData">
+                    <div class="col-md-1 user-info-icon">
+                      <img src="<%= image_path('green-user.png') %>">             
+                    </div>
+                    <div class="col-md-10 user-desp-part">
+                      <h4 ng-click="showDetailInfo($index)" style="cursor: pointer;">{{data.primary_type}}</h4>
+                      <h3>{{data.block}}({{data.location_description}})</h3>
+                      <div class="table-user-info" id="showInfo{{$index}}" style="display: none;">
+                          <ul>
+                            <li><span>Updated On :</span> {{(data.updated_on | date:'yyyy-MM-dd')}}</li>
+                            <li><span>Updated At :</span> {{(data.updated_on | date:'hh:mm:ss a')}}</li>
+                            <li><span>Incident ID : </span> {{data.id}}</li>
+                            <li><span>Case Number : </span> {{data.case_number}}</li>
+                            <li><span>Agency : </span> Chicago Police Department</li>
+                            <li><span>Arest Made : </span> {{data.arrest}}</li>
+                          </ul>
+                      </div> 	
+                    </div>
+                    <div class="col-md-1 user-liking">
+                       <p>{{(data.date | date:'yyyy-MM-dd')}}<span>{{(data.date | date:'hh:mm:ss a')}}</span></p> 
+                      <p class="comment-share"><a href="javascript:void(0);"><img src="<%= image_path('tip-icon.png') %>"></a><a class="share-icon" href="javascript:void(0);"><i class="fa fa-share"></i></a></p> 
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+          </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+    
+  
+ </section>
+ <script type="text/javascript">
+    $("#slider").dateRangeSlider();
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    
+    $(function () {
+      $('input,textarea').focus(function () {
+          $(this).data('placeholder', $(this).attr('placeholder'))
+                 .attr('placeholder', '');
+      }).blur(function () {
+          $(this).attr('placeholder', $(this).data('placeholder'));
+      });
+    });
+    
+    ( function() {
+      $('#btn-search').on('click', function(e) {
+        e.preventDefault();
+        $('#search').animate({width: 'toggle'}).focus();
+    
+      });
+    } () );
+    
+ </script>
+    

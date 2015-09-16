@@ -1,0 +1,132 @@
+<section ng-controller="mainController" ng-init="getData()">
+<div id="progress"><div id="progress-bar"><img src="<%= image_path("loader.gif") %>" alt="loader"/></div></div>
+<div class="customLoader" ng-show="showLoder">
+<img src="<%= image_path("loader.gif") %>" alt="loader"/>
+</div>
+
+<nav class="navbar navbar-inverse nav-bar-top navbar-fixed-top">
+               <div class="container-fluid">
+                                  <div class="navbar-header">
+                                                <a class="navbar-brand logo-brand demo_logo" href="javascript:void(0);">Angular Demo App</a>
+                                  </div>
+                                                                                                    
+                                  <div id="navbar" class="navbar-collapse ">
+                                       <ul class="navbar-form nav navbar navbar-right">
+                                          <li class="src_rw_lst">
+                                            <div class="form-group">
+                                              <form novalidate ng-submit="getAddress()" >
+                                                  <!--  <p class="add">Address</p> -->
+                                                   <input type="text" class="form-control" ng-model="newPlaceAddress" class="form-control"  />
+                                                   <input type="submit" class="btn btn-warning" value="" ng-disabled="changePasswordForm.$invalid" />
+                                              </form>
+                                            </div>
+                                           </li>
+                                        <!--  <li>  <p class="add">Date</p> <div id="slider"></div></li> -->
+                                        <li>  <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">
+                                        <button type="button" class="navbar-toggle tog_menu">
+                                                   <span class="sr-only">Toggle navigation</span>
+                                                   <span class="icon-bar"></span>
+                                                   <span class="icon-bar"></span>
+                                                   <span class="icon-bar"></span>
+                                                 </button></a></li>
+                                       </ul>
+                                  </div>
+               </div>
+</nav>
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+	       <li>
+		         <div id="navbar" class="navbar-collapse collapse mobile_div">
+                                       <ul class="navbar-form nav navbar navbar-right">
+                                          <li>
+                                            <div class="form-group">
+                                              <form novalidate ng-submit="getAddress()" >
+                                                   <p class="add">Address</p>
+                                                   <input type="text" class="form-control" ng-model="newPlaceAddress" class="form-control" placeholder="Enter Address" />
+                                                   <input type="submit" class="btn btn-warning" value="Show Location" ng-disabled="changePasswordForm.$invalid" />
+                                              </form>
+                                            </div>
+                                           </li>
+                                        
+                                       </ul>
+                                  </div>	
+	       </li>
+                <li class="sidebar-brand">
+                  Filters
+                </li>
+                <li>
+                    <p class="add">Time line</p>
+                    <div id="slider"></div>
+                </li>
+                <li class="crm_type">
+                 <p class="add">Crime Type</p>
+                 <table>
+                     <tr ng-repeat="data in crimeType">
+                          <td>
+                             <label> <input type="checkbox" checklist-model="search.type" checklist-value="data"> {{data}} </label>
+                          </td>
+                     </tr>
+                 </table>
+                </li>
+                <li>
+                                  <table class="table table-hovered" >
+                                      <thead>
+                                       <tr>
+                                         <th class="col-xs-2">Crime Type</th>
+                                         <th class="col-xs-2">Arrest</th>
+                                         <th class="col-xs-2">Case Number</th> 
+                                         <th class="col-xs-6">Description</th>
+                                         <th class="col-xs-2">Date</th>
+                                      </tr>
+                                      </thead>
+                                  <tbody>
+                                      <tr ng-repeat="info in serverData" ng-click="moveToMarker($index)">
+                                         <td class="col-xs-2"><b>{{info.primary_type}}</b></td>
+                                         <td class="col-xs-2">{{info.arrest}}</td>
+                                         <td class="col-xs-2">{{info.case_number}}</td> 
+                                         <td class="col-xs-6">{{info.description}}</td>
+                                          <td class="col-xs-2">{{info.date | date:'mediumDate'}}</td>
+                                      </tr>
+                                   </tbody>
+                                  </table>				  
+                </li>
+               
+            </ul>  
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+                    <div id="map"></div>
+        </div>
+        <!-- /#page-content-wrapper -->
+   
+    </div>
+    <!-- /#wrapper -->
+    
+    
+      
+    
+ </section>
+ 
+ <script type="text/javascript">
+    $("#slider").dateRangeSlider();
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    
+    $(function () {
+    $('input,textarea').focus(function () {
+        $(this).data('placeholder', $(this).attr('placeholder'))
+               .attr('placeholder', '');
+    }).blur(function () {
+        $(this).attr('placeholder', $(this).data('placeholder'));
+    });
+});
+ </script>
+    

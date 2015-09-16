@@ -16,6 +16,8 @@
 //= require jqueryUi
 //= require jquerymousewheel
 //= require jQDateRangeSlider
+//= require Chart
+//= require angular-chart
 //= require leaflet
 //= require leafletMarkercluster
 //= require leafletMarkerclusterSrc
@@ -24,5 +26,6 @@
 //= require MainController
 //= require listViewController
 //= require appFactory
+//= require trends_controller
 
 //= require_tree .
